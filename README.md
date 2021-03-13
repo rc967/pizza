@@ -27,3 +27,22 @@ Example : java -jar GANPizza.war --mode='client'
 What do you want to do: 
 
 NOTE : Run as many clients as u want upto 100 by opening new command prompts and repeat steps 5 and 6.
+
+
+Design Notes :
+
+1. Project created with Spring Boot starters.
+
+2. Design Patterns used are as below :
+
+3. ApplicationStateHolder.java follows Singleton Design pattern to maintain single instance for client requests. This is to maintain requirement of "Immediately notify users when ingredients are no longer available"
+
+4. OrderController.java is the java class that is exposed as a REST Service end point. This handles the order request from client and first checks for ingredients availability and upon which it calls method "bakePizzas". This method calls "ApplicationStateHolder" which is a single instance that connect to "Kitchen" class which handles pizza order and returns a list. This is a Factory design Pattern.
+
+5. OvenController.java is used to add Ovens only. Selection of Oven and its status is taken care by using Model object "Oven.java" in an appropriate way.
+
+6. Business Objects are under package "com.example.pizza.bom"
+
+7. JavaMethod names are created in a way to be self explanatory to its purpose.
+
+8. Client is also inbuilt in this project and can be confusing. ApplicationStateCreator.java and ClientConsoleRunner.java drive the client part.
